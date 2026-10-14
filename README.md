@@ -86,7 +86,7 @@ server-client-async/
 ### 1️⃣ Clone (after you push to GitHub)
 
 ```bash
-git clone https://github.com/<Komil-goat>/<server-client-async>.git
+git clone https://github.com/Komil-goat/server-client-async.git
 cd <server-client-async>
 ```
 
@@ -220,7 +220,7 @@ git add .
 git commit -m "chore: prepare public release (README, .gitignore, LICENSE)"
 gh repo create <your-repo> --public --source=. --push
 # ...or without gh CLI:
-# git remote add origin https://github.com/<Komil-goat>/<server-client-async>.git
+# git remote add origin https://github.com/Komil-goat/server-client-async.git
 # git push -u origin main
 ```
 
