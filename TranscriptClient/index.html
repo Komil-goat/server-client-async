@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transcript Management Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="dist/index.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 sm:p-8 font-sans">
+    <main class="max-w-5xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <header class="border-b border-slate-800 pb-5">
+            <h1 class="text-3xl font-bold tracking-tight text-white">Transcript Management System</h1>
+            <p class="text-slate-400 text-sm mt-1">Manage transcripts, student IDs, and course registrations.</p>
+        </header>
+
+        <!-- Main Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Section 1: All Data Fetching -->
+            <section class="bg-slate-800 border border-slate-700/60 rounded-xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xl font-semibold mb-4 text-emerald-400">All Records</h2>
+                    <div class="flex flex-wrap gap-3 mb-4">
+                        <button id="btnGetTranscripts" class="bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm shadow">
+                            Get Transcripts
+                        </button>
+                        <button id="btnGetStudentIDs" class="bg-slate-700 hover:bg-slate-600 active:bg-slate-800 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm border border-slate-600">
+                            Get Student IDs
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-4 mt-2">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Transcripts Data</label>
+                        <pre id="transcriptsContainer" class="bg-slate-950 text-emerald-300 p-4 rounded-lg text-xs font-mono min-h-[100px] max-h-[220px] overflow-auto border border-slate-800 border-dashed">No data fetched yet.</pre>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Student IDs Data</label>
+                        <pre id="studentIDsContainer" class="bg-slate-950 text-slate-300 p-4 rounded-lg text-xs font-mono min-h-[80px] max-h-[150px] overflow-auto border border-slate-800 border-dashed">No data fetched yet.</pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Student Actions -->
+            <section class="bg-slate-800 border border-slate-700/60 rounded-xl p-6 shadow-xl space-y-6">
+                
+                <!-- Add Student -->
+                <div>
+                    <h2 class="text-xl font-semibold mb-3 text-indigo-400">Add Student</h2>
+                    <div class="flex gap-2">
+                        <input type="text" id="transcriptInput" placeholder="Enter Student Name" 
+                               class="bg-slate-900 border border-slate-700 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white placeholder-slate-500 px-3.5 py-2 rounded-lg text-sm flex-1 outline-none">
+                        <button id="btnPostTranscript" class="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm shadow whitespace-nowrap">
+                            Post Transcript
+                        </button>
+                    </div>
+                </div>
+
+                <hr class="border-slate-700/50">
+
+                <!-- Student ID Operations -->
+                <div>
+                    <h2 class="text-xl font-semibold mb-3 text-sky-400">Manage Student Record</h2>
+                    <div class="space-y-3">
+                        <input type="text" id="idInput" placeholder="Enter Student ID" 
+                               class="w-full bg-slate-900 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 text-white placeholder-slate-500 px-3.5 py-2 rounded-lg text-sm outline-none">
+                        <div class="flex gap-2">
+                            <button id="btnGetTranscriptByID" class="flex-1 bg-sky-600 hover:bg-sky-500 active:bg-sky-700 text-white font-medium px-4 py-2 rounded-lg transition-colors text-sm shadow">
+                                Get Transcript
+                            </button>
+                            <button id="btnDeleteTranscript" class="flex-1 bg-rose-600/20 hover:bg-rose-600 text-rose-300 hover:text-white border border-rose-500/30 font-medium px-4 py-2 rounded-lg transition-colors text-sm">
+                                Delete Transcript
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Section 3: Course Operations -->
+            <section class="bg-slate-800 border border-slate-700/60 rounded-xl p-6 shadow-xl md:col-span-2 space-y-4">
+                <h2 class="text-xl font-semibold text-amber-400">Course Operations</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <input type="text" id="course" placeholder="Enter Course Name" 
+                           class="bg-slate-900 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-white placeholder-slate-500 px-3.5 py-2 rounded-lg text-sm outline-none">
+                    <input type="text" id="studentID" placeholder="Enter Student ID" 
+                           class="bg-slate-900 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-white placeholder-slate-500 px-3.5 py-2 rounded-lg text-sm outline-none">
+                    <input type="text" id="grade" placeholder="Enter Grade" 
+                           class="bg-slate-900 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 text-white placeholder-slate-500 px-3.5 py-2 rounded-lg text-sm outline-none">
+                </div>
+                <div class="flex gap-3 justify-end pt-2">
+                    <button id="btnGetCourse" class="bg-slate-700 hover:bg-slate-600 text-white font-medium px-5 py-2 rounded-lg transition-colors text-sm border border-slate-600">
+                        Get Course
+                    </button>
+                    <button id="btnPostCourse" class="bg-amber-600 hover:bg-amber-500 active:bg-amber-700 text-white font-medium px-5 py-2 rounded-lg transition-colors text-sm shadow">
+                        Post Course
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
