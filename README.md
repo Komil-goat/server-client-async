@@ -87,7 +87,7 @@ server-client-async/
 
 ```bash
 git clone https://github.com/Komil-goat/server-client-async.git
-cd <server-client-async>
+cd server-client-async
 ```
 
 ### 2️⃣ Start the server — http://localhost:4001
@@ -206,25 +206,6 @@ To rebuild without starting:
 ```bash
 npx tsc        # inside either TranscriptServer/ or TranscriptClient/
 ```
-
----
-
-## ☁️ Publish to GitHub (maintainer checklist)
-
-This repo is already cleaned: `node_modules/`, `dist/`, `.DS_Store` removed and covered by `.gitignore`.
-
-```bash
-# from the project root (server-client-async/)
-git init -b main
-git add .
-git commit -m "chore: prepare public release (README, .gitignore, LICENSE)"
-gh repo create <your-repo> --public --source=. --push
-# ...or without gh CLI:
-# git remote add origin https://github.com/Komil-goat/server-client-async.git
-# git push -u origin main
-```
-
-Then on GitHub: repo **Settings** → confirm **Public** visibility, add a description + topics (`typescript`, `express`, `rest-api`, `async`, `tailwind`).
 
 ---
 
